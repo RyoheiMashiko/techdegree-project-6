@@ -10,9 +10,37 @@ buttonElement.addEventListener('click', () => {
   overlay.style.display = 'none';
 });
 
-const phrases = ['country', 'dish', 'animal', 'nature', 'bedding'];
+const phrases = ['Hello world',
+                  'I love you',
+                  'Stay home', 
+                  'Keep going', 
+                  'Long way home'];
+
 
 function getRandomPhraseAsArray(arr){
-  let split = phrases[Math.floor(Math.random() * phrases.length)] ;
-  return split;
+  let randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+  let splitPhrase = randomPhrase.split('');
+  return splitPhrase;
 } 
+
+const phraseArray = getRandomPhraseAsArray(phrases);
+
+
+function addPhraseToDisplay(arr) {
+  // do stuff any arr that is passed in, and add to `#phrase ul`
+  for (let i = 0; i < arr.length; i ++) {
+    let Li = document.createElement('LI');
+    Li.textContent = arr[i];
+    let phraseUl = document.querySelector('#phrase ul');
+    phraseUl.appendChild(Li);
+
+  }
+}
+addPhraseToDisplay(phraseArray); 
+
+let keyBoard = document.querySelectorAll("#qwerty button");
+console.log(keyBoard);
+
+document.keyBoard.addEventListener('click', checkLetter(){
+
+} )
