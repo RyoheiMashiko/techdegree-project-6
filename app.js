@@ -12,7 +12,7 @@ buttonElement.addEventListener('click', () => {
 
 const phrases = ['Hello world',
                   'I love you',
-                  'Stay home', 
+                  'Stay foolish', 
                   'Keep going', 
                   'Long way home'];
 
@@ -33,14 +33,30 @@ function addPhraseToDisplay(arr) {
     Li.textContent = arr[i];
     let phraseUl = document.querySelector('#phrase ul');
     phraseUl.appendChild(Li);
-
+    if ( arr[i] !== ' ') {
+      Li.classList.add('letter');
+    }
   }
 }
 addPhraseToDisplay(phraseArray); 
 
-let keyBoard = document.querySelectorAll("#qwerty button");
-console.log(keyBoard);
+//Here is what I stack with...
+function checkLetter(button) {
+  let inputLetter = document.getElementsByClassName('letter');
+  for (let i = 0; i < inputLetter.length; i ++) {
+    if (inputLetter[i].textContent.toLowerCase() === button) {
+    inputLetter[i].classList.add("show");
+    let correctInput = inputLetter[i].textContent;
+    return correctInput;
+    }
+  }
+}
 
-document.keyBoard.addEventListener('click', checkLetter(){
+//'s' is sample of input of button.
+checkLetter('s');
+// let keyBoard = document.querySelectorAll("#qwerty button");
 
-} )
+// document.keyBoard.addEventListener("click", function(){
+
+// console.log('typed');
+// });
