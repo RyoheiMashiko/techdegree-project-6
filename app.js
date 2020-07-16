@@ -43,20 +43,20 @@ addPhraseToDisplay(phraseArray);
 //Here is what I stack with...
 function checkLetter(button) {
   let inputLetter = document.getElementsByClassName('letter');
+  let correctInput = null;
   for (let i = 0; i < inputLetter.length; i ++) {
     if (inputLetter[i].textContent.toLowerCase() === button) {
     inputLetter[i].classList.add("show");
-    let correctInput = inputLetter[i].textContent;
-    return correctInput;
-    }
+    correctInput = inputLetter[i].textContent;
+    } 
   }
+  // return correctInput;
+  return correctInput;
 }
 
-//'s' is sample of input of button.
-checkLetter('s');
-// let keyBoard = document.querySelectorAll("#qwerty button");
+let keyBoard = document.querySelectorAll("#qwerty button");
 
-// document.keyBoard.addEventListener("click", function(){
-
-// console.log('typed');
-// });
+document.keyBoard.addEventListener("click", function(){
+  
+console.log('typed');
+});
