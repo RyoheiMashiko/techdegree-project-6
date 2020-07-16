@@ -1,25 +1,32 @@
+const buttonElement = document.getElementsByClassName("btn__reset")[0];
 const phrases = ["Hello world",
-                  "I love you",
-                  "Stay foolish", 
-                  "Keep going", 
-                  "Long way home"];
+"I love you",
+"Stay foolish", 
+"Keep going", 
+"Long way home"];
 let missed = 0;
 
-const buttonElement = document.getElementsByClassName("btn__reset")[0];
+
+//Hiding "start game button"
 buttonElement.addEventListener("click", () => {
   overlay.style.display = "none";
+  const phraseDisplay = document.querySelectorAll(".letter");
+  for (let i = 0; i < phraseDisplay.length; i++) {
+    phraseDisplay[i].classList.add("newTransition");
+  }
 });
 
+//Getting random phrase and splitting it
 function getRandomPhraseAsArray(arr){
   const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
   const splitPhrase = randomPhrase.split("");
   return splitPhrase;
 } 
 
+//Displaying the phrase
 const phraseArray = getRandomPhraseAsArray(phrases);
-
+addPhraseToDisplay(phraseArray); 
 function addPhraseToDisplay(arr) {
-  // do stuff any arr that is passed in, and add to `#phrase ul`
   for (let i = 0; i < arr.length; i ++) {
     let Li = document.createElement("LI");
     Li.textContent = arr[i];
@@ -31,23 +38,21 @@ function addPhraseToDisplay(arr) {
   }
 }
 
-addPhraseToDisplay(phraseArray); 
-
-
+//Checking the letter if it matches the inputed letter 
 function checkLetter(button) {
   const inputLetter = document.getElementsByClassName("letter");
   let correctInput = null;
   for (let i = 0; i < inputLetter.length; i ++) {
     if (inputLetter[i].textContent.toLowerCase() === button) {
-    inputLetter[i].classList.add("show");
-    correctInput = inputLetter[i].textContent;
+      inputLetter[i].classList.add("show");
+      correctInput = inputLetter[i].textContent;
     } 
   }
   return correctInput;
 }
 
+//Counting missed guesses and checking win or lose
 const keyBoard = document.querySelector("#qwerty");
-
 keyBoard.addEventListener("click", (e) => {
   let button = e.target;
   if ( button.tagName === "BUTTON" ) {
@@ -58,11 +63,11 @@ keyBoard.addEventListener("click", (e) => {
   if ( letterFound === null) {
       document.querySelector("ol li").remove();
       missed ++ ;
-      console.log(missed);
     } 
   checkWin();
   });
   
+  //The function of checking outcome of a game
  function checkWin() {
   let numberOfLetter = document.getElementsByClassName("letter");
   let numberOfShow = document.getElementsByClassName("show");
@@ -76,11 +81,3 @@ keyBoard.addEventListener("click", (e) => {
       title.innerText= "Lose" ;
     }
   }
-
-
-// let test = document.getElementsByClassName("letter");
-
-// let title = document.getElementsByClassName("title");
-// // title.text("Win");
-// title.innerText = "ovelay";
-//   console.log(title);
