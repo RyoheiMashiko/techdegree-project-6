@@ -9,7 +9,7 @@ let missed = 0;
 
 //Hiding "start game button"
 buttonElement.addEventListener("click", () => {
-  overlay.style.display = "none";
+  overlay.style.visibility = "hidden";
   const phraseDisplay = document.querySelectorAll(".letter");
   for (let i = 0; i < phraseDisplay.length; i++) {
     phraseDisplay[i].classList.add("newTransition");
@@ -72,12 +72,28 @@ keyBoard.addEventListener("click", (e) => {
   let numberOfLetter = document.getElementsByClassName("letter");
   let numberOfShow = document.getElementsByClassName("show");
     if ( numberOfLetter.length === numberOfShow.length) {
-      overlay.style.display = "block";
+      overlay.style.visibility= "visible";
       let title = document.querySelector("#overlay h2");
-      title.innerText= "Win" ;
+      title.innerText = "Win" ;
+      buttonElement.innerText ="Success! Try again?";
+      // let resetButton = document.createElement("BUTTON");
     } else if ( missed >= 5) {
-      overlay.style.display = "block";
+      overlay.style.visibility= "visible";
       let title = document.querySelector("#overlay h2");
       title.innerText= "Lose" ;
+      buttonElement.innerText ="Failure! Try again?";
     }
+      buttonElement.addEventListener("click", () => {
+        
+      });
   }
+
+  function reset() {
+    for (let i = 0; i < inputLetter.length; i ++) {
+        const inputLetter = document.getElementsByClassName("letter");
+        inputLetter[i].classList.add("show");
+        correctInput = inputLetter[i].textContent;
+      } 
+    };
+
+
