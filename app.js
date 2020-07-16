@@ -84,16 +84,36 @@ keyBoard.addEventListener("click", (e) => {
       buttonElement.innerText ="Failure! Try again?";
     }
       buttonElement.addEventListener("click", () => {
-        
-      });
-  }
+        reset();
+      }
+    )
+ } 
 
+  //Restarting games function
   function reset() {
-    for (let i = 0; i < inputLetter.length; i ++) {
-        const inputLetter = document.getElementsByClassName("letter");
-        inputLetter[i].classList.add("show");
-        correctInput = inputLetter[i].textContent;
-      } 
-    };
+    const resetKeyBoard = document.querySelectorAll("#qwerty button");
+    const resetPhrase = document.querySelectorAll("ul li");
+    for (let i = 0; i < resetKeyBoard.length; i ++) {
+      resetKeyBoard[i].removeAttribute("class");
+      resetKeyBoard[i].disabled = false;
+    } 
+    for (let i = 0; i < resetPhrase.length; i ++) {
+      resetPhrase[i].remove();
+    } 
+    resetTries();
+  }
+  
+//The function of reset tries
+function resetTries(){
+  let i = 0;
+  const ol = document.querySelector("ol");
+  while(i < missed) { 
+    ol.insertAdjacentHTML( "afterbegin", '<li class="tries"><img src="images/liveHeart.png" height="35px" width="30px"></li>');
+    i ++;
+  }
+  missed = 0;
+}
 
-
+//   const ol = document.querySelector("ol");
+//   ol.insertAdjacentHTML( "afterbegin", '<li class="tries"><img src="images/liveHeart.png" height="35px" width="30px"></li>');
+//   ol.insertAdjacentHTML( "afterbegin", '<li class="tries"><img src="images/liveHeart.png" height="35px" width="30px"></li>');
