@@ -1,45 +1,41 @@
-let missed = 0;
-
-let buttonElement = document.getElementsByClassName("btn__reset")[0];
-
-buttonElement.addEventListener("click", () => {
-  // const overlay = document.getElementById('overlay');
-  overlay.style.display = "none";
-});
-
 const phrases = ["Hello world",
                   "I love you",
                   "Stay foolish", 
                   "Keep going", 
                   "Long way home"];
+let missed = 0;
 
+const buttonElement = document.getElementsByClassName("btn__reset")[0];
+buttonElement.addEventListener("click", () => {
+  overlay.style.display = "none";
+});
 
 function getRandomPhraseAsArray(arr){
-  let randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-  let splitPhrase = randomPhrase.split("");
+  const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+  const splitPhrase = randomPhrase.split("");
   return splitPhrase;
 } 
 
 const phraseArray = getRandomPhraseAsArray(phrases);
-
 
 function addPhraseToDisplay(arr) {
   // do stuff any arr that is passed in, and add to `#phrase ul`
   for (let i = 0; i < arr.length; i ++) {
     let Li = document.createElement("LI");
     Li.textContent = arr[i];
-    let phraseUl = document.querySelector("#phrase ul");
+    const phraseUl = document.querySelector("#phrase ul");
     phraseUl.appendChild(Li);
     if ( arr[i] !== " ") {
       Li.classList.add("letter");
     }
   }
 }
+
 addPhraseToDisplay(phraseArray); 
 
 
 function checkLetter(button) {
-  let inputLetter = document.getElementsByClassName("letter");
+  const inputLetter = document.getElementsByClassName("letter");
   let correctInput = null;
   for (let i = 0; i < inputLetter.length; i ++) {
     if (inputLetter[i].textContent.toLowerCase() === button) {
@@ -47,11 +43,10 @@ function checkLetter(button) {
     correctInput = inputLetter[i].textContent;
     } 
   }
-  // return correctInput;
   return correctInput;
 }
 
-let keyBoard = document.querySelector("#qwerty");
+const keyBoard = document.querySelector("#qwerty");
 
 keyBoard.addEventListener("click", (e) => {
   let button = e.target;
@@ -60,7 +55,7 @@ keyBoard.addEventListener("click", (e) => {
       button.disabled = true;
     }
   let letterFound = checkLetter(button.textContent);
-  if( letterFound === null) {
+  if ( letterFound === null) {
       document.querySelector("ol li").remove();
       missed ++ ;
       console.log(missed);
