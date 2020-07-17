@@ -1,4 +1,3 @@
-const buttonElement = document.getElementsByClassName("btn__reset")[0];
 const phrases = ["Hello world",
 "I love you",
 "Stay foolish", 
@@ -8,6 +7,7 @@ let missed = 0;
 
 
 //Hiding "start game button"
+const buttonElement = document.getElementsByClassName("btn__reset")[0];
 buttonElement.addEventListener("click", () => {
   overlay.style.visibility = "hidden";
   const phraseDisplay = document.querySelectorAll(".letter");
@@ -59,35 +59,35 @@ const keyBoard = document.querySelector("#qwerty");
 keyBoard.addEventListener("click", (e) => {
   let button = e.target;
   if ( button.tagName === "BUTTON" ) {
-      button.classList.add("chosen");
-      button.disabled = true;
+    button.classList.add("chosen");
+    button.disabled = true;
   }
   let letterFound = checkLetter(button.textContent);
   if ( letterFound === null) {
-      document.querySelector("ol li").remove();
-      missed ++ ;
+    document.getElementsByTagName("img")[missed].src = "images/lostHeart.png";
+    missed ++ ;
   } 
   checkWin();
 });
-  
+
   //The function of checking outcome of a game
  function checkWin() {
   let numberOfLetter = document.getElementsByClassName("letter");
   let numberOfShow = document.getElementsByClassName("show");
     if ( numberOfLetter.length === numberOfShow.length) {
-        overlay.style.visibility= "visible";
-        overlay.className = "win";
-        let title = document.querySelector("#overlay h2");
-        title.innerText = "Win" ;
-        buttonElement.innerText ="Success! Try again?";
-        reset();
+      overlay.style.visibility= "visible";
+      overlay.className = "win";
+      let title = document.querySelector("#overlay h2");
+      title.innerText = "Win" ;
+      buttonElement.innerText ="Success! Try again?";
+      reset();
     } else if ( missed >= 5) {
-        overlay.style.visibility= "visible";
-        overlay.className = "lose";
-        let title = document.querySelector("#overlay h2");
-        title.innerText= "Lose" ;
-        buttonElement.innerText ="Failure! Try again?";
-        reset();
+      overlay.style.visibility= "visible";
+      overlay.className = "lose";
+      let title = document.querySelector("#overlay h2");
+      title.innerText= "Lose" ;
+      buttonElement.innerText ="Failure! Try again?";
+      reset();
     }
  } 
 
@@ -110,11 +110,8 @@ keyBoard.addEventListener("click", (e) => {
   
 //The function of reset tries
 function resetTries(){
-  let i = 0;
-  const ol = document.querySelector("ol");
-  while(i < missed) { 
-    ol.insertAdjacentHTML( "afterbegin", '<li class="tries"><img src="images/liveHeart.png" height="35px" width="30px"></li>');
-    i ++;
-  }
-  missed = 0;
-}
+  while (missed > 0){
+  document.getElementsByTagName("img")[missed-1].src = "images/liveHeart.png";
+  missed -- ;
+ }
+} 
