@@ -34,6 +34,8 @@ function addPhraseToDisplay(arr) {
     phraseUl.appendChild(Li);
     if ( arr[i] !== " ") {
       Li.classList.add("letter");
+    }else {
+      Li.classList.add("space");
     }
   }
 }
@@ -51,6 +53,7 @@ function checkLetter(button) {
   return correctInput;
 }
 
+
 //Counting missed guesses and checking win or lose
 const keyBoard = document.querySelector("#qwerty");
 keyBoard.addEventListener("click", (e) => {
@@ -58,41 +61,34 @@ keyBoard.addEventListener("click", (e) => {
   if ( button.tagName === "BUTTON" ) {
       button.classList.add("chosen");
       button.disabled = true;
-    }
+  }
   let letterFound = checkLetter(button.textContent);
   if ( letterFound === null) {
       document.querySelector("ol li").remove();
       missed ++ ;
-    } 
+  } 
   checkWin();
-  });
+});
   
   //The function of checking outcome of a game
  function checkWin() {
   let numberOfLetter = document.getElementsByClassName("letter");
   let numberOfShow = document.getElementsByClassName("show");
     if ( numberOfLetter.length === numberOfShow.length) {
-      overlay.style.visibility= "visible";
-      let title = document.querySelector("#overlay h2");
-      title.innerText = "Win" ;
-      buttonElement.innerText ="Success! Try again?";
-      // let resetButton = document.createElement("BUTTON");
+        overlay.style.visibility= "visible";
+        overlay.className = "win";
+        let title = document.querySelector("#overlay h2");
+        title.innerText = "Win" ;
+        buttonElement.innerText ="Success! Try again?";
+        reset();
     } else if ( missed >= 5) {
-      overlay.style.visibility= "visible";
-      let title = document.querySelector("#overlay h2");
-      title.innerText= "Lose" ;
-      buttonElement.innerText ="Failure! Try again?";
+        overlay.style.visibility= "visible";
+        overlay.className = "lose";
+        let title = document.querySelector("#overlay h2");
+        title.innerText= "Lose" ;
+        buttonElement.innerText ="Failure! Try again?";
+        reset();
     }
-    buttonElement.addEventListener("click", () => {
-      reset();
-      const phraseArray = getRandomPhraseAsArray(phrases);
-      addPhraseToDisplay(phraseArray); 
-      const phraseDisplay = document.querySelectorAll(".letter");
-      for (let i = 0; i < phraseDisplay.length; i++) {
-        phraseDisplay[i].classList.add("newTransition");
-      }
-     }
-   )
  } 
 
   //Restarting games function
@@ -107,6 +103,9 @@ keyBoard.addEventListener("click", (e) => {
       resetPhrase[i].remove();
     } 
     resetTries();
+    const phraseArray = getRandomPhraseAsArray(phrases);
+    addPhraseToDisplay(phraseArray); 
+    const phraseDisplay = document.querySelectorAll(".letter");
   }
   
 //The function of reset tries
@@ -119,7 +118,3 @@ function resetTries(){
   }
   missed = 0;
 }
-
-//   const ol = document.querySelector("ol");
-//   ol.insertAdjacentHTML( "afterbegin", '<li class="tries"><img src="images/liveHeart.png" height="35px" width="30px"></li>');
-//   ol.insertAdjacentHTML( "afterbegin", '<li class="tries"><img src="images/liveHeart.png" height="35px" width="30px"></li>');
