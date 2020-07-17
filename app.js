@@ -63,7 +63,7 @@ keyBoard.addEventListener("click", (e) => {
     button.disabled = true;
   }
   let letterFound = checkLetter(button.textContent);
-  if ( letterFound === null) {
+  if ( letterFound === null && button.tagName === "BUTTON" ) {
     document.getElementsByTagName("img")[missed].src = "images/lostHeart.png";
     missed ++ ;
   } 
