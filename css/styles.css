@@ -92,6 +92,7 @@ button {
   width: 15px;
 }
 
+/* adding property of transition */
 .newTransition {
   background-color:rgb(255, 182, 45);
   transition:background-color 0.5s ease-in-out;

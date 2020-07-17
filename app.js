@@ -83,10 +83,16 @@ keyBoard.addEventListener("click", (e) => {
       title.innerText= "Lose" ;
       buttonElement.innerText ="Failure! Try again?";
     }
-      buttonElement.addEventListener("click", () => {
-        reset();
+    buttonElement.addEventListener("click", () => {
+      reset();
+      const phraseArray = getRandomPhraseAsArray(phrases);
+      addPhraseToDisplay(phraseArray); 
+      const phraseDisplay = document.querySelectorAll(".letter");
+      for (let i = 0; i < phraseDisplay.length; i++) {
+        phraseDisplay[i].classList.add("newTransition");
       }
-    )
+     }
+   )
  } 
 
   //Restarting games function
